@@ -1,3 +1,5 @@
+# Populate data using CSV in Django
+
 # Description
 This project demonstrates how to user CSV file to populate data in Django Model programmatically.
 
