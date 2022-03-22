@@ -1,3 +1,4 @@
+import codecs
 import csv
 
 from django.core.files.base import ContentFile
@@ -63,6 +64,34 @@ class ProductViewSet(viewsets.ModelViewSet):
                     name=name,
                     description=description,
                     quantity=quantity,
+                )
+            )
+
+        Product.objects.bulk_create(product_list)
+
+        return Response("Successfully upload the data")
+
+    @action(detail=False, methods=['POST'])
+    def upload_data_with_validation(self, request):
+        """Upload data from CSV, with validation."""
+        file = request.FILES.get("file")
+
+        reader = csv.DictReader(codecs.iterdecode(file, "utf-8"), delimiter=",")
+        data = list(reader)
+
+        serializer = self.serializer_class(data=data, many=True)
+        serializer.is_valid(raise_exception=True)
+
+        product_list = []
+        for row in serializer.data:
+            product_list.append(
+                Product(
+                    user_id=row["user"],
+                    category=row["category"],
+                    price=row["price"],
+                    name=row["name"],
+                    description=row["description"],
+                    quantity=row["quantity"],
                 )
             )
 
