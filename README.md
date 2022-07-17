@@ -10,3 +10,7 @@ This project demonstrates how to user CSV file to populate data in Django Model 
 4. Install all the packages (pip install -r requirements.txt)
 5. Navigate inside the project (cd src)
 6. Run the project (python manage.py runserver)
+
+## Video Sereis:
+Part 1 (Using Django): https://youtu.be/UKE5yQAmg0k<br />
+Part 2 (Using DRF)   : https://youtu.be/lJBxANzyIeU 
